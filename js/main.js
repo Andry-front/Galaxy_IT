@@ -22,4 +22,53 @@ document.addEventListener('DOMContentLoaded', () => {
             tab.classList.add('tab-active');
         });
     });
+
+    const toggleButton = document.getElementById('toggle-button');
+    const expandableText = document.getElementById('description');
+
+    toggleButton.addEventListener('click', (event) => {
+        expandableText.classList.toggle('expanded');
+        if (expandableText.classList.contains('expanded')) {
+            event.target.classList.add('open');
+        } else {
+            event.target.classList.remove('open');
+        }
+    });
+
+
+    const closeModal = document.getElementById("closeModal");
+    const openModal = document.getElementById("openModal");
+
+    const modal = document.getElementById("modal");
+
+    openModal.addEventListener("click", () => {
+        const modalContent = modal.querySelector(".modal-content");
+        const modalImageContainer = document.getElementById("modalImageContainer");
+        const content = document.querySelector('.tab-content-color .tab-content-active img');
+
+        const clonedImage = content.cloneNode(true);
+        modalImageContainer.innerHTML = '';
+        modalImageContainer.appendChild(clonedImage);
+
+        modal.classList.add("show");
+        modalContent.classList.add("show");
+    });
+
+    const eventCloseModal = () => {
+        const modal = document.getElementById("modal");
+        const modalContent = modal.querySelector(".modal-content");
+        modal.classList.remove("show");
+        modalContent.classList.remove("show");
+    };
+
+    closeModal.addEventListener("click", () => {
+        eventCloseModal();
+    });
+
+    document.addEventListener("keydown", function(e) {
+        if (e.key === "Escape") {
+            eventCloseModal();
+        }
+    });
+
 });
